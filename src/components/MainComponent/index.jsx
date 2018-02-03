@@ -1,12 +1,12 @@
 import React from 'react';
 
-import TripList from '../TripList';
+import AddTripForm from '../../containers/AddTripForm';
 
 function MainComponent() {
   return (
     <div>
       <h1>Main Component</h1>
-      <TripList />
+      <AddTripForm />
     </div>
   );
 }
