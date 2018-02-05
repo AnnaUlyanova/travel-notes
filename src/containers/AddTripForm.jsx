@@ -8,15 +8,15 @@ import fire from '../firebase';
 import AddTripForm from '../components/AddTripForm';
 
 const enhance = compose(
-  withState('newTripLocation', 'setNewTripLocation', ''),
-  withState('newTripDate', 'setNewTripDate', ''),
+  withState('tripLocation', 'setTripLocation', ''),
+  withState('tripDate', 'setTripDate', ''),
   withHandlers({
-    handleChange: ({ setNewTripLocation, setNewTripDate }) => (e) => {
-      setNewTripLocation(e.target.value);
-      setNewTripDate(new Date().getTime());
+    handleChange: ({ setTripLocation, setTripDate }) => (e) => {
+      setTripLocation(e.target.value);
+      setTripDate(new Date().getTime());
     },
     addTrip: ({
-      setNewTripLocation, setNewTripDate, newTripLocation, newTripDate,
+      setTripLocation, setTripDate, tripLocation, tripDate,
     }) => (e) => {
       e.preventDefault();
       const user = fire.auth().currentUser;
@@ -26,12 +26,12 @@ const enhance = compose(
       }
       const tripRef = fire.database().ref(`/trips/${userId}`);
       const trip = {
-        newTripLocation,
-        newTripDate,
+        tripLocation,
+        tripDate,
       };
       tripRef.push(trip);
-      setNewTripLocation('');
-      setNewTripDate('');
+      setTripLocation('');
+      setTripDate('');
     },
   }),
 );
